@@ -1,0 +1,22 @@
+name: ESPN Theme
+type: theme
+description: 'Practice for me recreating the ESPN website.'
+core: 10.x
+core_version_requirement: ^9 || ^10
+base theme: stark
+logo: images/logo.webp
+screenshot: images/logo.webp
+regions:
+  admin_menu: 'Admin Menu'
+  espn_menu: 'Scoreboard'
+  header: 'Header'
+  content_top: 'Content Top'
+  content: 'Content'
+  sidebar_right: 'Sidebar Right'
+  sidebar_left: 'Sidebar Left'
+  footer: 'Footer'
+  page_top: 'Page Top'
+  page_bottom: 'Page Bottom'
+libraries:
+  - espn_theme/global-css
+    

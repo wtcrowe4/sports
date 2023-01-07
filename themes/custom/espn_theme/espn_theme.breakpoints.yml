@@ -1,0 +1,38 @@
+espn_theme.mobile:
+  label: 'Mobile'
+  mediaQuery: '(max-width: 767px)'
+  weight: 0
+  multipliers:
+    - 0.5
+    - 0.75
+    - 1
+    - 1.5
+    - 2
+    - 3
+    - 4
+
+espn_theme.tablet:
+  label: 'Tablet'
+  mediaQuery: '(min-width: 768px) and (max-width: 1023px)'
+  weight: 1
+  multipliers:
+    - 0.5
+    - 0.75
+    - 1
+    - 1.5
+    - 2
+    - 3
+    - 4
+
+espn_theme.full:
+  label: 'Full'
+  mediaQuery: '(min-width: 1024px)'
+  weight: 2
+  multipliers:
+    - 0.5
+    - 0.75
+    - 1
+    - 1.5
+    - 2
+    - 3
+    - 4
