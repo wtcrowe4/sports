@@ -118,4 +118,6 @@ footer {
   padding: 0;
   margin: 0;
   border-top: 2px solid white;
+  position: fixed;
+  bottom: 0;
 }/*# sourceMappingURL=main.css.map */

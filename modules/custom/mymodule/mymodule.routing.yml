@@ -1,0 +1,26 @@
+mymodule.content:
+  path: '/mymodulecontent'
+  defaults:
+    _controller: '\Drupal\mymodule\Controller\FirstController::content'
+    _title: 'My Module Content'
+  requirements: 
+    _permission: 'access content'
+
+
+mymodule.variablecontent:
+  path: '/mymodulecontent/{name1}/{name2}'
+  defaults:
+    _controller: '\Drupal\mymodule\Controller\FirstController::variableContent'
+    _title: 'Dynamic Module Content'
+  requirements:
+    _permission: 'access content'
+
+
+mymodule.nflscores:
+  path: '/nflscores'
+  defaults:
+    _controller: '\Drupal\mymodule\Controller\FirstController::getNFL'
+    _title: 'NFL Scores'
+  requirements:
+    _method: 'GET'
+    _permission: 'access content'

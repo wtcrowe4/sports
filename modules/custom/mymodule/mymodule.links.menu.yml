@@ -1,0 +1,13 @@
+mymodule.simplecontent:
+  title: 'Simple Content'
+  route_name: mymodule.content
+  description: 'Simple content page from mymodule'
+  weight: 10
+  menu_name: main
+
+mymodule.nflscores:
+  title: 'NFL Scores'
+  route_name: mymodule.nflscores
+  description: 'NFL Scores page from mymodule'
+  weight: 20
+  menu_name: main
