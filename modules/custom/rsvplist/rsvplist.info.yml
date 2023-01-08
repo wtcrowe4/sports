@@ -1,0 +1,9 @@
+name: 'RSVP List'
+type: module
+description: 'Provides an RSVP list functionality to events.'
+package: 'Custom'
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:block
+
+configure: rsvplist.admin_settings
