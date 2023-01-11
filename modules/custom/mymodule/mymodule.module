@@ -1,5 +1,8 @@
 <?php
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 /** 
  * @file
  * This file demenstrates how to use hook functions in Drupal.
@@ -21,4 +24,25 @@ function mymodule_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_
   if ($form_id == 'node_article_edit_form') {
     $form['actions']['submit']['#value'] = 'Dont forget to save me!';
   }
+}
+
+/**
+ * hook_getNFL()
+ *
+ */
+function mymodule_getNFL() {
+  $client = \Drupal::httpClient();
+  $request = $client->get('https://odds.p.rapidapi.com/v4/sports/americanfootball_nfl/scores',
+    [
+      'headers' => [
+        'X-RapidAPI-Key' => $API_KEY,
+        'X-RapidAPI-Host' => 'odds.p.rapidapi.com',
+      ],
+      'query' => [
+        'daysFrom' => '3'
+      ]
+    ]);
+  $response = $request->getBody();
+  $data = json_decode($response, TRUE);
+  echo $data;
 }

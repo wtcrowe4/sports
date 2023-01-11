@@ -57,7 +57,7 @@ class RSVPForm extends FormBase {
     public function validateForm(array &$form, FormStateInterface $form_state) {
       $value = $form_state->getValue('email');
       if ($value == !\Drupal::service('email.validator')->isValid($value)) {
-        $form_state->setErrorByName('email', 'The email address %mail is not valid.', array('%mail' => $value));
+        $form_state->setErrorByName('email', 'The email address ' . $value . ' is not valid.');
       }
     }
 
@@ -65,9 +65,24 @@ class RSVPForm extends FormBase {
      * {@inheritdoc}
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
-      $nid = $form_state->getValue('nid');
-      $submitted_email = $form_state->getValue('email');
-      $this->messenger()->addMessage('The form is working, you entered: ' . $submitted_email);
+        try {
+            $connection = \Drupal::database();
+            $connection->insert('rsvplist')
+                ->fields(array(
+                    'mail' => $form_state->getValue('email'),
+                    'nid' => $form_state->getValue('nid'),
+                    'uid' => 0,
+                    'created' => time(),
+                ))
+                ->execute();
+            \Drupal::messenger()->addMessage('Thank you for your RSVP, you are on the list for the event.');
+        } catch (\Exception $e) {
+            \Drupal::messenger()->addMessage('Unable to put you on the list, try again later.', 'error');
+        }
+    
+    //   $nid = $form_state->getValue('nid');
+    //   $submitted_email = $form_state->getValue('email');
+    //   $this->messenger()->addMessage('The form is working, you entered: ' . $submitted_email);
 
     //   $message = \Drupal::service('plugin.manager.mail')->mail('rsvplist', 'rsvpemail', $form_state->getValue('email'),
     //     \Drupal::languageManager()->getDefaultLanguage(), 

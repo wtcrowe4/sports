@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the RSVP List module.
+ *
+ */
+
+ function rsvplist_schema() {
+    $schema['rsvplist'] = [
+      'description' => 'Stores the RSVP email addresses.',
+      'fields' => [
+        'id' => [
+          'type' => 'serial',
+          'description' => 'Primary Key: Unique RSVP ID.',
+          'size' => 'small',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'uid' => [
+          'type' => 'int',
+          'description' => 'The {users}.uid of the user who RSVPed.',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'nid' => [
+          'type' => 'int',
+          'description' => 'The {node}.nid of the node the user RSVPed to.',  
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'mail' => [
+          'type' => 'varchar',
+          'description' => 'The email address of the user who RSVPed.',
+          'length' => 128,
+          'not null' => TRUE,
+        ],
+        'created' => [
+          'type' => 'int',
+          'description' => 'The time that the user RSVPed.',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+      ],
+      'primary key' => ['id'],
+      'unique keys' => [
+        'mail_nid' => ['mail', 'nid'],
+      ],
+      'indexes' => [
+        'nid' => ['nid'],
+        'node_user' => ['nid', 'uid'],
+      ],
+    ];
+
+    $schema['rsvplist_enabled'] = [
+      'description' => 'Stores the RSVP enabled status for each node.',
+      'fields' => [
+        'nid' => [
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'enabled' => [
+          'type' => 'boolean',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => FALSE,
+        ],
+      ],
+      'primary key' => ['nid'],
+    ];
+
+    return $schema;
+ }
